@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 // heroicons import
@@ -18,9 +18,28 @@ const Contributors = () => {
   const [proceed, setProceed] = useState(false);
   const [username, setUsername] = useState("");
   const [amount, setAmount] = useState(0);
+  const [self_email, setSelfEmail] = useState("");
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      const userDetails = await JSON.parse(
+        localStorage.getItem("user_details")
+      );
+      const userEmail = await userDetails.email;
+      setSelfEmail(userEmail);
+    };
+
+    fetchUserData();
+    console.log(self_email);
+  });
 
   const onSubmitFormEmail = async (e) => {
     e.preventDefault();
+    
+    if (email == self_email) {
+      return toast.error ("Can't send to yourself!");
+    }
+    
     try {
       const body = { email };
       // console.log(body);

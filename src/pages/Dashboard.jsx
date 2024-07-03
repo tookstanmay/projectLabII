@@ -23,6 +23,9 @@ import AddExpenseForm from "../components/AddExpenseForm";
 import { toast } from "react-toastify";
 import Alert from "../components/Alert";
 
+import problemSolving from "../assets/problemSolving.gif";
+
+
 // loader
 export async function dashboardLoader() {
   const budgets = await fetchData("budgets");
@@ -124,23 +127,26 @@ const Dashboard = () => {
         localStorage.getItem("user_details")
       );
       const userID = await userDetails.id;
+      const user_username = await userDetails.user_name;
       const userEmail = await userDetails.email;
       setBalance(parseFloat(await userDetails.balance));
-      if (userID) {
-        try {
-          const response = await fetch(
-            `http://localhost:5000/getuser/${userID}`
-          );
-          if (!response.ok) {
-            throw new Error("Network response was not ok");
-          }
-          const data = await response.json();
-          setUsername(data.user_name);
-          setEmail(userEmail);
-        } catch (error) {
-          console.error("Error fetching user data:", error);
-        }
-      }
+      setUsername(user_username);
+      setEmail(userEmail);
+      // if (userID) {
+      //   try {
+      //     const response = await fetch(
+      //       `http://localhost:5000/getuser/${userID}`
+      //     );
+      //     if (!response.ok) {
+      //       throw new Error("Network response was not ok");
+      //     }
+      //     const data = await response.json();
+      //     setUsername(data.user_name);
+      //     setEmail(userEmail);
+      //   } catch (error) {
+      //     console.error("Error fetching user data:", error);
+      //   }
+      // }
     };
 
     fetchUserData();
@@ -266,12 +272,30 @@ const Dashboard = () => {
           </div>
         </div>
       ) : (
-        <div className="flex-sm">
-          <Link to={"/login"} className="btn btn--dark">
-            <span>Login</span>
-            <UserIcon width={20} />
-          </Link>
+      <div style={{height: "100%", width: "100%", display: "flex", flexDirection: "row", justifyContent: "space-around"}}>
+        <div style={{height: "100%", display: "flex", flexDirection: "column", justifyContent: "center", gap: "20px"}}>
+          <div>
+            <Link to={"/login"} className="btn btn--dark">
+              <span>Login</span>
+              <UserIcon width={20} />
+            </Link>
+          </div>
+          <div>
+            <Link to={"/register"} className="btn btn--dark">
+              <span>Register</span>
+              <UserIcon width={20} />
+            </Link>
+          </div>
         </div>
+        <div>
+          <img
+            src={problemSolving}
+            height={450}
+            width={450}
+            alt="Person's image"
+          />
+        </div>
+      </div>
       )}
     </>
   );

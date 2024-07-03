@@ -1,7 +1,7 @@
 import * as React from "react";
 
 // rrd imports
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, Navigate, RouterProvider } from "react-router-dom";
 
 // Library imports
 import { ToastContainer } from "react-toastify";
@@ -32,6 +32,10 @@ import GroupState from "../context/groups/GroupState";
 import PieChart from "./components/PieChart";
 
 const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Navigate to={"dashboard"} replace />,
+  },
   {
     path: "/",
     element: <Main />,

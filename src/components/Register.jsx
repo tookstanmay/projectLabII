@@ -81,7 +81,7 @@ const Intro = () => {
             onChange={(e) => {
               setPassword(e.target.value);
             }}
-            placeholder="🤫🤫 Password?"
+            placeholder="Password?"
             aria-label="Your Password"
             autoComplete="off"
           />

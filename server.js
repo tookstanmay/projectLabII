@@ -67,7 +67,7 @@ app.post("/save-image", async (req, res) => {
   // Decode the data URL and save the image to the public/images/ directory
   const base64Data = image.replace(/^data:image\/png;base64,/, "");
   fs.writeFile(
-    "C:/Users/tooks/OneDrive/Desktop/Projects/projectLabII/src/images/captured-chart.png",
+    "C:/Users/tooks/OneDrive/Desktop/projectLabII/src/images/captured-chart.png",
     base64Data,
     "base64",
     (err) => {
